@@ -19,6 +19,7 @@ export default function GamesSection() {
     fetchGames();
   }, []);
 
+  // Renderiza as estrelas baseado na avaliação
   const renderStars = (rating) => {
     const stars = [];
     const fullStars = Math.floor(rating);
@@ -71,6 +72,40 @@ export default function GamesSection() {
     return stars;
   };
 
+  // Filtra e combina os jogos para exibir
+  const getFeaturedGames = () => {
+    if (games.length === 0) return [];
+
+    // 2 jogos mais baratos
+    const cheapest = games
+      .slice()
+      .sort((a, b) => a.price - b.price)
+      .slice(0, 2);
+
+    // 2 melhores avaliados que não estejam nos baratos
+    const bestRated = games
+      .slice()
+      .filter((game) => !cheapest.some((c) => c.id === game.id))
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, 2);
+
+    // Combina os jogos
+    let combinedGames = [...cheapest, ...bestRated];
+
+    // Completa até 4 jogos, se necessário
+    if (combinedGames.length < 4) {
+      const excludedIds = combinedGames.map((g) => g.id);
+      const extraGames = games
+        .filter((game) => !excludedIds.includes(game.id))
+        .slice(0, 4 - combinedGames.length);
+      combinedGames = [...combinedGames, ...extraGames];
+    }
+
+    return combinedGames;
+  };
+
+  const featuredGames = getFeaturedGames();
+
   return (
     <section className="bg-gray-900 py-16 px-4">
       <div className="container mx-auto max-w-7xl">
@@ -79,11 +114,10 @@ export default function GamesSection() {
         </h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {games.map((game) => {
-            // Escapa caracteres especiais da URL para evitar erros
+          {featuredGames.map((game) => {
             const imageUrl = game.image
               ? `http://localhost:4000/${encodeURI(game.image)}`
-              : "/fallback-image.png"; // imagem fallback opcional
+              : "/fallback-image.png";
 
             return (
               <div
