@@ -43,7 +43,7 @@ export default function LaunchCountdown() {
 
   return (
     <section
-      className="relative bg-cover bg-center bg-no-repeat py-40 text-white"
+      className="relative bg-cover bg-center bg-no-repeat py-52 -mt-[90px] text-white"
       style={{ backgroundImage: "url('/gta6-banner.png')" }}
     >
       <div className="absolute inset-0 bg-black/70 z-0"></div>

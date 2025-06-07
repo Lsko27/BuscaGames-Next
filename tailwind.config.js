@@ -1,20 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/**/*.{js,jsx,ts,tsx}", // Ajuste conforme sua estrutura de pastas
+    "./src/pages/**/*.{js,jsx,ts,tsx}",
+    "./src/components/**/*.{js,jsx,ts,tsx}",
+    // se usar app router (Next 13+):
+    "./src/app/**/*.{js,jsx,ts,tsx}"
   ],
   theme: {
-    extend: {
-      animation: {
-        'spin-slow-3d': 'spinY 10s linear infinite',
-      },
-      keyframes: {
-        spinY: {
-          '0%': { transform: 'rotateY(0deg)' },
-          '100%': { transform: 'rotateY(360deg)' },
-        },
-      },
-    },
+    extend: {},
   },
   plugins: [],
-};
+}
