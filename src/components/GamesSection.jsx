@@ -88,16 +88,22 @@ export default function GamesSection() {
             return (
               <div
                 key={game.id}
-                className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg"
+                className="relative group cursor-pointer overflow-hidden rounded-lg shadow-lg hover:shadow-[0_0_15px_5px_rgba(135,206,250,0.5)]"
               >
                 <img
                   src={imageUrl}
                   alt={game.title ?? "Game image"}
-                  className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110"
+                  className="w-full h-56 object-cover transition-transform duration-300 group-hover:scale-110 group-hover:blur-sm"
                   loading="lazy"
                 />
 
-                <div className="absolute inset-0 bg-black bg-opacity-75 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-between p-4 text-white">
+                {/* Fundo preto semi-transparente */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <div className="w-full h-full bg-black bg-opacity-75 opacity-0 group-hover:opacity-70 transition-opacity duration-300"></div>
+                </div>
+
+                {/* Conteúdo que aparece no hover */}
+                <div className="absolute inset-0 flex flex-col justify-between p-4 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <h3 className="text-xl font-semibold mb-2">
                     {game.title ?? "Título não disponível"}
                   </h3>
@@ -131,9 +137,7 @@ export default function GamesSection() {
                   </div>
 
                   <div className="flex items-center justify-between">
-                    <div className="flex items-center">
-                      {renderStars(game.rating ?? 0)}
-                    </div>
+                    <div className="flex items-center">{renderStars(game.rating ?? 0)}</div>
                     <button
                       type="button"
                       className="bg-green-600 hover:bg-green-700 active:bg-green-800 transition-colors text-white font-semibold px-4 py-2 rounded"
