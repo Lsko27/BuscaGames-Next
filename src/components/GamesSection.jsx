@@ -148,12 +148,12 @@ export default function GamesSection() {
                         <span className="line-through text-gray-400 text-sm">
                           R$ {game.originalPrice?.toFixed(2)}
                         </span>
-                        <span className="text-yellow-400 font-bold text-lg">
+                        <span className="text-green-400 font-bold text-lg">
                           R$ {game.price?.toFixed(2)}
                         </span>
                       </>
                     ) : (
-                      <span className="text-yellow-400 font-bold text-lg">
+                      <span className="text-green-400 font-bold text-lg">
                         R$ {game.price?.toFixed(2)}
                       </span>
                     )}

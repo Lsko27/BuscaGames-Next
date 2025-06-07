@@ -1,4 +1,4 @@
-import LaunchCountdownCube from '../../components/LaunchCountdownCube'
+import LaunchCountdownCube from '../../components/LaunchCountdown'
 import GamesSection from '../../components/GamesSection'
 import { DailyQuests, Newsletter } from '../../components/DailyQuests'
 
